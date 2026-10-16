@@ -36,7 +36,6 @@ html[dir=rtl] body{font-family:"Readex Pro",Geist,system-ui,sans-serif}
 a{color:var(--fg);text-decoration:none}
 a:hover{color:var(--muted)}
 a:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .mono{margin:0;font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.08em}
 html[dir=rtl] .mono{font-family:"Readex Pro",Geist,sans-serif;font-size:14px;line-height:22px;font-weight:400;letter-spacing:0}
 .sub{color:var(--sub)}
@@ -49,7 +48,6 @@ html[dir=rtl] .mono{font-family:"Readex Pro",Geist,sans-serif;font-size:14px;lin
 .logo-ar{height:52px;animation-name:cut-ar}
 @keyframes cut{from{clip-path:polygon(0 0,0 0,-21px 100%,0 100%)}to{clip-path:polygon(0 0,calc(100% + 21px) 0,100% 100%,0 100%)}}
 @keyframes cut-ar{from{clip-path:polygon(0 0,0 0,-37px 100%,0 100%)}to{clip-path:polygon(0 0,calc(100% + 37px) 0,100% 100%,0 100%)}}
-.tag{max-width:380px;display:flex;flex-direction:column;gap:10px;text-align:end}
 
 .stage{--fs:1;position:absolute;inset:0;perspective:3000px;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
 .scale{position:relative;width:0;height:0;transform-style:preserve-3d;transform:scale(var(--fs))}
@@ -65,8 +63,6 @@ html[dir=rtl] .h1{font-size:clamp(46px,5.4vw,82px);line-height:1.18;font-weight:
 .line > span{display:block;animation:rise 600ms cubic-bezier(.2,0,0,1) both}
 @keyframes rise{from{transform:translateY(105%)}to{transform:none}}
 .side{width:clamp(300px,24vw,380px)}
-.lede{margin:0 0 22px;font-size:17px;line-height:27px;color:var(--muted)}
-html[dir=rtl] .lede{font-size:18px;line-height:32px;font-weight:300}
 .form{display:flex;flex-direction:column;gap:10px}
 .row{display:flex}
 .input{flex:1 1 180px;min-width:0;height:52px;box-sizing:border-box;padding:0 14px;border:1px solid var(--sub);border-right:0;border-radius:0;background:transparent;color:var(--fg);font:inherit;font-size:16px;transition:border-color 160ms cubic-bezier(.2,0,0,1)}
@@ -90,13 +86,8 @@ html[dir=rtl] .hint{font-size:15px;line-height:24px}
 .done{margin:0;display:flex;align-items:center;gap:12px;font-size:17px;line-height:26px;font-weight:600}
 html[dir=rtl] .done{font-weight:500}
 
-.foot{position:absolute;inset-inline:48px;inset-block-end:36px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px;z-index:3}
-.foot-start,.foot-mid,.foot-end{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.foot-end{justify-self:end}
-.meter{display:block;width:64px;height:2px;background:var(--line);overflow:hidden}
-.meter > span{display:block;width:100%;height:100%;background:var(--fg);transform-origin:left center;transform:scaleX(.21);transition:transform 120ms linear}
-html[dir=rtl] .meter > span{transform-origin:right center}
-.rpm{font-family:"Geist Mono",ui-monospace,monospace !important;font-size:12px !important;letter-spacing:.08em !important;font-variant-numeric:tabular-nums}
+.foot{position:absolute;inset-inline:48px;inset-block-end:36px;display:flex;justify-content:flex-end;align-items:center;z-index:3}
+.foot-end{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .toggle{min-height:44px;padding:0 16px;border:1px solid var(--sub);border-radius:0;background:transparent;color:var(--fg);font-family:"Readex Pro",Geist,sans-serif;font-size:15px;cursor:pointer;transition:border-color 160ms cubic-bezier(.2,0,0,1)}
 .toggle:hover{border-color:var(--fg)}
 .toggle:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
@@ -125,12 +116,10 @@ html[dir=rtl] .meter > span{transform-origin:right center}
 @media (max-width:760px){
 .root{padding:24px 20px 28px}
 .head{flex-direction:column;gap:20px}
-.tag{text-align:start;max-width:none}
 .stage{height:380px;--fs:.5}
 .bottom{flex-direction:column;align-items:stretch;gap:32px}
 .side{width:auto}
-.foot{grid-template-columns:minmax(0,1fr);justify-items:start;gap:16px;margin-top:48px}
-.foot-end{justify-self:start}
+.foot{justify-content:flex-start;margin-top:48px}
 }
 @media (prefers-reduced-motion:reduce){
 *,*::before{animation:none !important;transition:none !important}
@@ -144,16 +133,6 @@ html[dir=rtl] .meter > span{transform-origin:right center}
 <div class="brand">
 <img class="logo" data-lang="en" src="/assets/leyxo-lockup-horizontal-reversed.svg" alt="Leyxo Studio" width="130" height="30">
 <img class="logo logo-ar" data-lang="ar" hidden src="/assets/leyxo-lockup-signage-reversed.svg" alt="ليكسو ستوديو، Leyxo Studio" width="138" height="52">
-</div>
-<div class="tag">
-<div data-lang="en">
-<p class="mono fade d1"><span class="sr">Full-stack marketing and media agency, Dubai</span><span aria-hidden="true" data-scramble>FULL-STACK MARKETING AND MEDIA AGENCY · DUBAI</span></p>
-<p class="mono sub up d5" style="margin-top:10px">BRANDING / CONTENT / CAMPAIGNS / MEDIA</p>
-</div>
-<div data-lang="ar" hidden>
-<p class="mono up d1">وكالة تسويق وإعلام متكاملة · دبي</p>
-<p class="mono sub up d5" style="margin-top:10px">العلامة التجارية / المحتوى / الحملات / الإعلام</p>
-</div>
 </div>
 </header>
 
@@ -186,7 +165,6 @@ html[dir=rtl] .meter > span{transform-origin:right center}
 </div>
 <div class="side up d4">
 <div data-lang="en">
-<p class="lede">Branding, content, campaigns and media, all under one roof. Be first to see it.</p>
 <form class="form" novalidate data-form>
 <label for="email-en" class="mono">WORK EMAIL</label>
 <div class="row">
@@ -198,7 +176,6 @@ html[dir=rtl] .meter > span{transform-origin:right center}
 <p class="done" role="status" data-done hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>You're on the list. One email, at launch.</p>
 </div>
 <div data-lang="ar" hidden>
-<p class="lede">العلامة التجارية والمحتوى والحملات والإعلام، كلها تحت سقف واحد. كن أول من يراه.</p>
 <form class="form" novalidate data-form>
 <label for="email-ar" class="mono">البريد الإلكتروني للعمل</label>
 <div class="row">
@@ -213,18 +190,6 @@ html[dir=rtl] .meter > span{transform-origin:right center}
 </main>
 
 <footer class="foot fade d6">
-<div class="foot-start">
-<a class="mono" data-lang="en" href="mailto:hello@leyxo.com">CONTACT</a>
-<span class="mono sub" data-lang="en">DUBAI, UAE</span>
-<a class="mono" data-lang="ar" hidden href="mailto:hello@leyxo.com">تواصل</a>
-<span class="mono sub" data-lang="ar" hidden>دبي، الإمارات</span>
-</div>
-<div class="foot-mid">
-<span class="mono sub" data-lang="en">SCROLL TO SPIN</span>
-<span class="mono sub" data-lang="ar" hidden>مرّر للدوران</span>
-<span class="meter" aria-hidden="true"><span data-meter></span></span>
-<span class="mono rpm" dir="ltr" aria-hidden="true">RPM <span data-rpm>01.5</span></span>
-</div>
 <div class="foot-end">
 <span class="mono sub" data-lang="en">© 2026 LEYXO STUDIO</span>
 <button type="button" class="toggle" data-lang="en" lang="ar" data-toggle-lang>العربية</button>
@@ -240,36 +205,12 @@ html[dir=rtl] .meter > span{transform-origin:right center}
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var titles = { en: 'Leyxo Studio · Coming soon', ar: 'ليكسو ستوديو · قريباً' };
 
-  /* Tagline scramble */
-  var scrEl = document.querySelector('[data-scramble]');
-  var target = scrEl ? scrEl.textContent : '';
-  var scrT = null;
-  function scramble() {
-    if (!scrEl) return;
-    clearInterval(scrT);
-    if (reduce) { scrEl.textContent = target; return; }
-    var glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/_-', t0 = performance.now();
-    function step() {
-      var p = Math.max(0, Math.min(1, (performance.now() - t0 - 280) / 560));
-      var n = Math.floor(p * target.length), out = '';
-      for (var i = 0; i < target.length; i++) {
-        var c = target.charAt(i);
-        out += (i < n || c === ' ' || c === '·') ? c : glyphs.charAt((Math.random() * glyphs.length) | 0);
-      }
-      scrEl.textContent = out;
-      if (p >= 1) { clearInterval(scrT); scrEl.textContent = target; }
-    }
-    step();
-    scrT = setInterval(step, 40);
-  }
-
   /* Language */
   function setLang(l, animate) {
     root.lang = l; root.dir = l === 'ar' ? 'rtl' : 'ltr'; document.title = titles[l];
     var els = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < els.length; i++) els[i].hidden = els[i].getAttribute('data-lang') !== l;
     try { localStorage.setItem(KEY, l); } catch (e) {}
-    if (l === 'en' && animate) scramble();
   }
   var start = 'en';
   try {
@@ -308,11 +249,10 @@ html[dir=rtl] .meter > span{transform-origin:right center}
 
   /* Spinning gallery */
   var group = document.querySelector('[data-group]');
-  var rpmEl = document.querySelector('[data-rpm]'), meterEl = document.querySelector('[data-meter]');
   if (!group) return;
   var BASE = 0.009; /* degrees per ms, 9 degrees per second */
   var angle = -36, boost = reduce ? 0 : 0.3, tilt = 48, ry = 0, px = 0, py = 0;
-  var t0 = performance.now(), last = t0, ui = 0, shown = '', touchY = null;
+  var t0 = performance.now(), last = t0, touchY = null;
   function clamp(v) { return Math.max(-0.5, Math.min(0.5, v)); }
   function loop(now) {
     requestAnimationFrame(loop);
@@ -329,16 +269,6 @@ html[dir=rtl] .meter > span{transform-origin:right center}
     var ip = reduce ? 1 : Math.min(1, (now - t0) / 1100);
     var sc = 0.84 + 0.16 * (1 - Math.pow(1 - ip, 3));
     group.style.transform = 'rotateY(' + ry.toFixed(3) + 'deg) rotateX(' + tilt.toFixed(3) + 'deg) rotateZ(' + angle.toFixed(3) + 'deg) scale(' + sc.toFixed(4) + ')';
-    if (now - ui > 120) {
-      ui = now;
-      var rpm = Math.abs(vel) * 60000 / 360;
-      var txt = (rpm < 10 ? '0' : '') + rpm.toFixed(1);
-      if (txt !== shown) {
-        shown = txt;
-        if (rpmEl) rpmEl.textContent = txt;
-        if (meterEl) meterEl.style.transform = 'scaleX(' + Math.min(1, Math.log(1 + rpm) / Math.log(85)).toFixed(3) + ')';
-      }
-    }
   }
   requestAnimationFrame(loop);
   setTimeout(function () { group.classList.add('open'); }, reduce ? 0 : 250);
