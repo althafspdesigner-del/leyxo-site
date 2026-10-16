@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leyxo Studio · Coming soon</title>
+<meta name="description" content="Leyxo Studio is a full-stack marketing and media agency in Dubai. Branding, content, campaigns and media, all under one roof. Launching soon.">
+<meta name="theme-color" content="#0E0D0C">
+<link rel="canonical" href="https://leyxo.com/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://leyxo.com/">
+<meta property="og:site_name" content="Leyxo Studio">
+<meta property="og:title" content="Leyxo Studio · Coming soon">
+<meta property="og:description" content="Full-stack marketing and media agency in Dubai. Branding, content, campaigns and media, all under one roof.">
+<meta property="og:image" content="https://leyxo.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Geist;src:url(/assets/fonts/Geist-Variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(/assets/fonts/GeistMono-Variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Readex Pro";src:url(/assets/fonts/ReadexPro-Variable.woff2) format("woff2");font-weight:160 700;font-display:swap}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:#0E0D0C;color:#F4F0E8}
+body{font-family:Geist,"Readex Pro",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-synthesis:none;text-rendering:optimizeLegibility}
+html[dir=rtl] body{font-family:"Readex Pro",Geist,system-ui,sans-serif}
+a{color:#A39C93;text-decoration:none;transition:color 160ms cubic-bezier(.2,0,0,1)}
+a:hover{color:#F4F0E8}
+a:focus-visible{outline:2px solid #8B6CFF;outline-offset:3px;border-radius:2px}
+.root{--ph:clamp(300px,54vh,580px);--run:calc(var(--ph) * 0.7);position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr auto;grid-template-areas:"head aside" "main aside" "foot aside"}
+.head{grid-area:head;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:44px 0}
+.main{grid-area:main;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:64px}
+.foot{grid-area:foot;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;padding-block:0 40px}
+.col{padding-inline:80px 40px}
+.aside{grid-area:aside;position:relative;padding-block:52px calc(var(--ph) + 48px);padding-inline:40px 80px}
+.logo-en{height:28px;width:auto;display:block}
+.logo-ar{height:52px;width:auto;display:block}
+.mono{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.08em}
+html[dir=rtl] .mono{font-family:"Readex Pro",Geist,sans-serif;font-size:14px;line-height:22px;font-weight:400;letter-spacing:0}
+.label{color:#A39C93}
+h1{margin:0;font-size:clamp(56px,7.4vw,120px);line-height:.9;font-weight:600;letter-spacing:-0.035em}
+html[dir=rtl] h1{font-size:clamp(54px,6.8vw,112px);line-height:1.2;font-weight:480;letter-spacing:0}
+.lead{margin:0;max-width:520px;font-size:19px;line-height:30px;color:#A39C93}
+html[dir=rtl] .lead{font-size:20px;line-height:36px;font-weight:320}
+form{display:flex;flex-direction:column;gap:10px;max-width:520px;margin-top:8px}
+form label{font-size:14px;line-height:20px;font-weight:600}
+html[dir=rtl] form label{font-size:16px;line-height:24px;font-weight:480}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+input{flex:1 1 200px;min-width:0;height:48px;padding:0 14px;border-radius:4px;border:1px solid #6B6660;background:#1A1816;color:#F4F0E8;font:inherit;font-size:16px}
+input::placeholder{color:#8A847C}
+input:focus{outline:2px solid #8B6CFF;outline-offset:2px;border-color:#F4F0E8}
+input[aria-invalid=true]{border-color:#F4F0E8}
+.btn{height:48px;padding:0 22px;border-radius:4px;border:0;background:#8B6CFF;color:#0E0D0C;font:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:background-color 160ms cubic-bezier(.2,0,0,1)}
+html[dir=rtl] .btn{font-size:16px;font-weight:480}
+.btn:hover{background:#F4F0E8}
+.btn:focus-visible,.toggle:focus-visible{outline:2px solid #8B6CFF;outline-offset:2px}
+.hint{margin:0;font-size:14px;line-height:20px;color:#8A847C}
+html[dir=rtl] .hint{font-size:15px;line-height:24px}
+.hint.error{color:#F4F0E8}
+.done{margin:8px 0 0;display:flex;align-items:flex-start;gap:12px;max-width:520px;font-size:17px;line-height:26px;font-weight:600}
+html[dir=rtl] .done{font-size:18px;line-height:30px;font-weight:480}
+.done svg{flex:none;margin-top:2px}
+.toggle{min-height:44px;padding:0 16px;border-radius:4px;border:1px solid #6B6660;background:transparent;color:#F4F0E8;font:inherit;font-size:15px;cursor:pointer;transition:border-color 160ms cubic-bezier(.2,0,0,1)}
+.toggle:hover{border-color:#F4F0E8}
+.toggle[lang=ar]{font-family:"Readex Pro",sans-serif}
+.toggle[lang=en]{font-family:Geist,sans-serif}
+.log{max-width:440px;margin-inline-start:auto}
+.log-row{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding-block:12px;border-top:1px solid #2A2724}
+.log-row:last-child{border-bottom:1px solid #2A2724}
+.log-date{color:#8A847C}
+.log-item{font-size:15px;line-height:22px;color:#F4F0E8}
+.log-status{color:#A39C93;display:inline-flex;align-items:center;gap:8px}
+.cursor{display:inline-block;width:8px;height:14px;background:#F4F0E8}
+.photo{position:absolute;bottom:0;left:0;width:100%;height:var(--ph);transform:skewX(-35deg);transform-origin:bottom left;overflow:hidden}
+html[dir=rtl] .photo{left:calc(-1 * var(--run))}
+.photo img{position:absolute;top:0;left:calc(-1 * var(--run));width:calc(100% + 2 * var(--run));max-width:none;height:100%;object-fit:cover;transform:skewX(35deg);transform-origin:bottom left;display:block}
+.wipe{position:absolute;top:0;height:100vh;width:7vw;left:calc(-60vh - 10vw);background:#8B6CFF;transform:skewX(-35deg);pointer-events:none;z-index:5;animation:wipe 400ms cubic-bezier(.65,0,.35,1) 150ms both}
+html[dir=rtl] .wipe{animation-name:wipe-rtl}
+@keyframes wipe{from{left:calc(-60vh - 10vw)}to{left:calc(100% + 40vh)}}
+@keyframes wipe-rtl{from{left:calc(100% + 40vh)}to{left:calc(-60vh - 10vw)}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:900px){
+.root{--ph:260px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto;grid-template-areas:"head" "main" "aside" "foot"}
+.col{padding-inline:24px}
+.head{padding-block:28px 0}
+.main{padding-block:48px 40px}
+.aside{padding-block:8px calc(var(--ph) + 40px);padding-inline:24px}
+.log{margin-inline-start:0;max-width:none}
+.foot{padding-block:32px 32px}
+.lead{font-size:17px;line-height:27px}
+}
+@media (prefers-reduced-motion:reduce){.wipe{display:none}}
+</style>
+</head>
+<body>
+<div class="root">
+
+<header class="head col">
+<a href="/" data-lang="en" aria-label="Leyxo Studio, home"><img class="logo-en" src="/assets/leyxo-lockup-horizontal-reversed.svg" alt="Leyxo Studio" width="121" height="28"></a>
+<a href="/" data-lang="ar" aria-label="ليكسو ستوديو" hidden><img class="logo-ar" src="/assets/leyxo-lockup-signage-reversed.svg" alt="ليكسو ستوديو، Leyxo Studio" width="138" height="52"></a>
+<button type="button" class="toggle" lang="ar" data-lang="en" data-toggle-lang>العربية</button>
+<button type="button" class="toggle" lang="en" data-lang="ar" data-toggle-lang hidden>English</button>
+</header>
+
+<main class="main col">
+<div data-lang="en" style="display:contents">
+<div class="mono label">FULL-STACK MARKETING AND MEDIA AGENCY · DUBAI</div>
+<h1>Polish<br>at speed.</h1>
+<p class="lead">Branding, content, campaigns and media, all under one roof. We started with our own brand. The site is in production.</p>
+<form novalidate data-form>
+<label for="email-en">Work email</label>
+<div class="row">
+<input id="email-en" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" placeholder="name@company.com" aria-describedby="hint-en">
+<button type="submit" class="btn">Notify me</button>
+</div>
+<p id="hint-en" class="hint" data-hint data-ok="One email when we launch. Nothing else." data-err="Enter a full email address, like name@company.com.">One email when we launch. Nothing else.</p>
+</form>
+<p class="done" role="status" data-done hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F0E8" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Your email app is opening with the note ready. Press send and you're on the list.</span></p>
+</div>
+<div data-lang="ar" style="display:contents" hidden>
+<div class="mono label">وكالة تسويق وإعلام متكاملة · دبي</div>
+<h1>إتقان<br>بسرعة.</h1>
+<p class="lead">العلامة التجارية والمحتوى والحملات والإعلام، كلها تحت سقف واحد. بدأنا بعلامتنا. الموقع قيد الإنتاج.</p>
+<form novalidate data-form>
+<label for="email-ar">البريد الإلكتروني للعمل</label>
+<div class="row">
+<input id="email-ar" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" placeholder="name@company.com" aria-describedby="hint-ar">
+<button type="submit" class="btn">أبلغني</button>
+</div>
+<p id="hint-ar" class="hint" data-hint data-ok="رسالة واحدة عند الإطلاق، لا أكثر." data-err="أدخل عنوان بريد إلكتروني كاملاً، مثل name@company.com.">رسالة واحدة عند الإطلاق، لا أكثر.</p>
+</form>
+<p class="done" role="status" data-done hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F0E8" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>سيفتح تطبيق البريد برسالة جاهزة. اضغط إرسال لتنضم إلى القائمة.</span></p>
+</div>
+</main>
+
+<aside class="aside" aria-labelledby="log-title">
+<div class="log">
+<h2 id="log-title" class="mono label" style="margin:0 0 14px;font-weight:500"><span data-lang="en">PRODUCTION LOG</span><span data-lang="ar" hidden>سجل الإنتاج</span></h2>
+<div data-lang="en">
+<div class="log-row"><span class="mono log-date">15 OCT</span><span class="log-item">Brand system v1.0</span><span class="mono log-status">DONE</span></div>
+<div class="log-row"><span class="mono log-date">15 OCT</span><span class="log-item">Identity and logo suite</span><span class="mono log-status">DONE</span></div>
+<div class="log-row"><span class="mono log-date">16 OCT</span><span class="log-item">Instagram profile</span><span class="mono log-status">DONE</span></div>
+<div class="log-row"><span class="mono log-date">NOW</span><span class="log-item">leyxo.com</span><span class="mono log-status">IN PRODUCTION<span class="cursor" aria-hidden="true"></span></span></div>
+<div class="log-row"><span class="mono log-date">SOON</span><span class="log-item">Launch</span><span class="mono log-status"></span></div>
+</div>
+<div data-lang="ar" hidden>
+<div class="log-row"><span class="mono log-date">15 أكتوبر</span><span class="log-item">نظام العلامة التجارية 1.0</span><span class="mono log-status">مكتمل</span></div>
+<div class="log-row"><span class="mono log-date">15 أكتوبر</span><span class="log-item">الهوية ومجموعة الشعار</span><span class="mono log-status">مكتمل</span></div>
+<div class="log-row"><span class="mono log-date">16 أكتوبر</span><span class="log-item">حساب إنستغرام</span><span class="mono log-status">مكتمل</span></div>
+<div class="log-row"><span class="mono log-date">الآن</span><span class="log-item" dir="ltr">leyxo.com</span><span class="mono log-status">قيد الإنتاج<span class="cursor" aria-hidden="true"></span></span></div>
+<div class="log-row"><span class="mono log-date">قريباً</span><span class="log-item">الإطلاق</span><span class="mono log-status"></span></div>
+</div>
+</div>
+<div class="photo" aria-hidden="true"><picture><source srcset="/assets/photo-cut-shadow.webp" type="image/webp"><img src="/assets/photo-cut-shadow.jpg" alt="" width="1600" height="1067" decoding="async"></picture></div>
+</aside>
+
+<footer class="foot col">
+<span class="mono" style="color:#8A847C" data-lang="en">© 2026 LEYXO STUDIO</span>
+<span class="mono" style="color:#8A847C" data-lang="ar" hidden>© 2026 ليكسو ستوديو</span>
+<a class="mono" href="mailto:hello@leyxo.com" dir="ltr">HELLO@LEYXO.COM</a>
+</footer>
+
+<div class="wipe" aria-hidden="true"></div>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, KEY = 'leyxo-lang';
+  var titles = { en: 'Leyxo Studio · Coming soon', ar: 'ليكسو ستوديو · قريباً' };
+  function setLang(l) {
+    root.lang = l; root.dir = l === 'ar' ? 'rtl' : 'ltr'; document.title = titles[l];
+    var els = document.querySelectorAll('[data-lang]');
+    for (var i = 0; i < els.length; i++) els[i].hidden = els[i].getAttribute('data-lang') !== l;
+    try { localStorage.setItem(KEY, l); } catch (e) {}
+  }
+  var start = 'en';
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    var saved = localStorage.getItem(KEY);
+    start = (q === 'ar' || q === 'en') ? q : (saved === 'ar' ? 'ar' : 'en');
+  } catch (e) {}
+  setLang(start);
+  var toggles = document.querySelectorAll('[data-toggle-lang]');
+  for (var t = 0; t < toggles.length; t++) toggles[t].addEventListener('click', function () {
+    setLang(root.lang === 'ar' ? 'en' : 'ar');
+    var next = document.querySelector('[data-toggle-lang]:not([hidden])'); if (next) next.focus();
+  });
+  var forms = document.querySelectorAll('[data-form]');
+  for (var f = 0; f < forms.length; f++) (function (form) {
+    var input = form.querySelector('input'), hint = form.querySelector('[data-hint]');
+    var done = form.parentNode.querySelector('[data-done]');
+    input.addEventListener('input', function () {
+      input.removeAttribute('aria-invalid'); hint.classList.remove('error'); hint.textContent = hint.getAttribute('data-ok');
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = input.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+        input.setAttribute('aria-invalid', 'true'); hint.classList.add('error'); hint.textContent = hint.getAttribute('data-err'); input.focus();
+        return;
+      }
+      var subject = encodeURIComponent('Notify me when Leyxo launches');
+      var body = encodeURIComponent('Please add me to the Leyxo launch list: ' + v);
+      window.location.href = 'mailto:hello@leyxo.com?subject=' + subject + '&body=' + body;
+      form.hidden = true; done.hidden = false;
+    });
+  })(forms[f]);
+})();
+</script>
+</body>
+</html>
