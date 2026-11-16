@@ -2,124 +2,117 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leyxo Studio · Coming soon</title>
-<meta name="description" content="Leyxo Studio is a full-stack marketing and media agency in Dubai. Branding, content, campaigns and media, all under one roof. Launching soon.">
-<meta name="theme-color" content="#0E0D0C">
-<meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leyxo · Coming soon</title>
+<meta name="description" content="Leyxo is a full-stack marketing and media agency for every kind of business. Brands that wink back. Launching soon.">
+<meta name="theme-color" content="#D4FF24">
+<meta name="color-scheme" content="light">
 <link rel="canonical" href="https://leyxo.com/">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://leyxo.com/">
-<meta property="og:site_name" content="Leyxo Studio">
-<meta property="og:title" content="Leyxo Studio · Coming soon">
-<meta property="og:description" content="Full-stack marketing and media agency in Dubai. Branding, content, campaigns and media, all under one roof.">
-<meta property="og:image" content="https://leyxo.com/assets/og-image.jpg">
+<meta property="og:site_name" content="Leyxo">
+<meta property="og:title" content="Leyxo · Brands that wink back.">
+<meta property="og:description" content="Full-stack marketing and media agency for every kind of business. Launching soon.">
+<meta property="og:image" content="https://leyxo.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@400;600&family=Baloo+Bhaijaan+2:wght@500;700;800&display=swap">
 <script>document.documentElement.className += ' js';</script>
 <style>
-@font-face{font-family:Geist;src:url(/assets/fonts/Geist-Variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"Geist Mono";src:url(/assets/fonts/GeistMono-Variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"Readex Pro";src:url(/assets/fonts/ReadexPro-Variable.woff2) format("woff2");font-weight:160 700;font-display:swap}
-:root{--bg:#0E0D0C;--raised:#1A1816;--fg:#F4F0E8;--muted:#A39C93;--sub:#8A847C;--line:#3A3632;--signal:#8B6CFF;--btn-bg:#F4F0E8;--btn-fg:#0E0D0C}
+/* Leyxo, The Wink: lime ground, midnight type, cobalt wink. */
+:root{--lime:#D4FF24;--cobalt:#1558C9;--midnight:#030407;--paper:#F3F4EF;--sky:#C9DAF8;--muted:#5B6170;
+--display:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;--text:"Instrument Sans","Baloo Bhaijaan 2",system-ui,sans-serif;--arabic:"Baloo Bhaijaan 2","Instrument Sans",system-ui,sans-serif}
 [hidden]{display:none !important}
 html,body{overscroll-behavior:none}
-html{background:var(--bg)}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:Geist,"Readex Pro",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-synthesis:none}
-html[dir=rtl] body{font-family:"Readex Pro",Geist,system-ui,sans-serif}
-a{color:var(--fg);text-decoration:none}
-a:hover{color:var(--muted)}
-a:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.mono{margin:0;font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.08em}
-html[dir=rtl] .mono{font-family:"Readex Pro",Geist,sans-serif;font-size:14px;line-height:22px;font-weight:400;letter-spacing:0}
-.sub{color:var(--sub)}
+html{background:var(--lime)}
+body{margin:0;background:var(--lime);color:var(--midnight);font-family:var(--text);-webkit-font-smoothing:antialiased;font-synthesis:none}
+html[dir=rtl] body{font-family:var(--arabic)}
+a{color:var(--midnight)}
+a:hover{color:var(--cobalt)}
+.label{margin:0;font-size:13px;line-height:16px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+html[dir=rtl] .label{font-size:15px;line-height:22px;font-weight:700;letter-spacing:0;text-transform:none}
 
-.root{position:relative;height:100vh;height:100dvh;min-height:640px;overflow:hidden;box-sizing:border-box}
+.root{position:relative;height:100vh;height:100dvh;min-height:680px;overflow:hidden;box-sizing:border-box}
 
-.head{position:absolute;inset-block-start:40px;inset-inline:48px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;z-index:3}
-.brand{min-height:52px}
-.logo{display:block;height:30px;width:auto;animation:cut 600ms cubic-bezier(.2,0,0,1) 120ms both}
-.logo-ar{height:52px;animation-name:cut-ar}
-@keyframes cut{from{clip-path:polygon(0 0,0 0,-21px 100%,0 100%)}to{clip-path:polygon(0 0,calc(100% + 21px) 0,100% 100%,0 100%)}}
-@keyframes cut-ar{from{clip-path:polygon(0 0,0 0,-37px 100%,0 100%)}to{clip-path:polygon(0 0,calc(100% + 37px) 0,100% 100%,0 100%)}}
+.head{position:absolute;inset-block-start:calc(40px + env(safe-area-inset-top,0px));inset-inline:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;z-index:3}
+.logo{display:block;width:156px;height:auto;animation:fade 500ms linear 120ms both}
+.face{display:block;width:76px;height:auto;animation:wink 900ms cubic-bezier(.2,0,0,1) 700ms both}
+@keyframes wink{0%{transform:scale(.6) rotate(-12deg);opacity:0}60%{transform:scale(1.08) rotate(4deg);opacity:1}100%{transform:none;opacity:1}}
 
-.stage{--fs:1;position:absolute;inset:0;perspective:3000px;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
+.stage{--fs:.9;position:absolute;inset:0 0 150px 0;perspective:3000px;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
 .scale{position:relative;width:0;height:0;transform-style:preserve-3d;transform:scale(var(--fs))}
 .group{position:relative;width:0;height:0;transform-style:preserve-3d;transform:rotateX(48deg)}
-.card{position:absolute;left:0;top:0;width:300px;height:300px;overflow:hidden;background:var(--raised);transform:translate(-50%,-50%) rotateZ(calc(var(--i) * 24deg)) translate3d(0,-160px,0) rotateY(90deg) scale(1);opacity:1;transition:transform 600ms cubic-bezier(.2,0,0,1),opacity 300ms linear;transition-delay:calc(var(--i) * 40ms)}
+.card{position:absolute;left:0;top:0;width:300px;height:240px;overflow:hidden;border-radius:16px;background:var(--paper);transform:translate(-50%,-50%) rotateZ(calc(var(--i) * 25.714deg)) translate3d(0,-160px,0) rotateY(90deg) scale(1);opacity:1;transition:transform 600ms cubic-bezier(.2,0,0,1),opacity 300ms linear;transition-delay:calc(var(--i) * 40ms)}
 .js .group:not(.open) .card{transform:translate(-50%,-50%) rotateZ(0deg) translate3d(0,-160px,0) rotateY(90deg) scale(.6);opacity:0}
-.card img{display:block;width:100%;height:100%;object-fit:cover;transform:rotate(270deg) scale(1.04);user-select:none;-webkit-user-drag:none}
+.card img{position:absolute;left:30px;top:-30px;display:block;width:240px;height:300px;object-fit:cover;transform:rotate(270deg) scale(1.02);user-select:none;-webkit-user-drag:none}
 
-.bottom{position:absolute;inset-inline:48px;inset-block-end:100px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;z-index:3}
-.h1{margin:0;font-size:clamp(48px,5.8vw,88px);line-height:.92;font-weight:600;letter-spacing:-0.035em}
-html[dir=rtl] .h1{font-size:clamp(46px,5.4vw,82px);line-height:1.18;font-weight:500;letter-spacing:0}
+.bottom{position:absolute;inset-inline:48px;inset-block-end:104px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;z-index:3}
+.title{display:flex;flex-direction:column;align-items:flex-start;gap:20px;min-width:0}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 14px;border-radius:999px;background:var(--cobalt);color:var(--paper)}
+.dot{width:8px;height:8px;border-radius:999px;background:var(--lime)}
+.h1{margin:0;font-family:var(--display);font-size:clamp(52px,6.4vw,104px);line-height:.95;font-weight:800;letter-spacing:-0.025em;font-optical-sizing:auto}
+html[dir=rtl] .h1{font-family:var(--arabic);font-size:clamp(48px,6.2vw,96px);line-height:1.2;letter-spacing:0}
 .line{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
 .line > span{display:block;animation:rise 600ms cubic-bezier(.2,0,0,1) both}
 @keyframes rise{from{transform:translateY(105%)}to{transform:none}}
-.side{width:clamp(300px,24vw,380px)}
-.form{display:flex;flex-direction:column;gap:10px}
-.row{display:flex}
-.input{flex:1 1 180px;min-width:0;height:52px;box-sizing:border-box;padding:0 14px;border:1px solid var(--sub);border-right:0;border-radius:0;background:transparent;color:var(--fg);font:inherit;font-size:16px;transition:border-color 160ms cubic-bezier(.2,0,0,1)}
-html[dir=rtl] .input{border-right:1px solid var(--sub);border-left:0}
-.input::placeholder{color:var(--sub)}
-.input:hover{border-color:var(--fg)}
-.input:focus{outline:2px solid var(--fg);outline-offset:2px}
-.input[aria-invalid=true]{border-color:var(--fg)}
-.btn{position:relative;overflow:hidden;isolation:isolate;flex:0 0 auto;height:52px;padding:0 22px;border:0;border-radius:0;background:var(--btn-bg);color:var(--btn-fg);font-family:"Geist Mono",ui-monospace,monospace;font-size:13px;font-weight:500;letter-spacing:.08em;cursor:pointer}
-html[dir=rtl] .btn{font-family:"Readex Pro",Geist,sans-serif;font-size:16px;font-weight:500;letter-spacing:0}
-.btn::before{content:"";position:absolute;top:0;bottom:0;left:-40px;width:calc(100% + 80px);background:var(--signal);transform:translateX(-101%) skewX(-35deg);transform-origin:bottom left;transition:transform 420ms cubic-bezier(.65,0,.35,1);z-index:-1}
-.btn:hover::before,.btn:focus-visible::before{transform:translateX(0) skewX(-35deg)}
-.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-.roll{display:block;height:18px;line-height:18px;overflow:hidden}
-html[dir=rtl] .roll{height:26px;line-height:26px}
-.roll > span{display:block;transition:transform 420ms cubic-bezier(.65,0,.35,1)}
-.btn:hover .roll > span,.btn:focus-visible .roll > span{transform:translateY(-100%)}
-.hint{margin:0;font-size:14px;line-height:20px;color:var(--sub)}
-html[dir=rtl] .hint{font-size:15px;line-height:24px}
-.hint.error{color:var(--fg)}
-.done{margin:0;display:flex;align-items:center;gap:12px;font-size:17px;line-height:26px;font-weight:600}
-html[dir=rtl] .done{font-weight:500}
 
-.foot{position:absolute;inset-inline:48px;inset-block-end:36px;display:flex;justify-content:flex-end;align-items:center;z-index:3}
-.foot-end{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.toggle{min-height:44px;padding:0 16px;border:1px solid var(--sub);border-radius:0;background:transparent;color:var(--fg);font-family:"Readex Pro",Geist,sans-serif;font-size:15px;cursor:pointer;transition:border-color 160ms cubic-bezier(.2,0,0,1)}
-.toggle:hover{border-color:var(--fg)}
-.toggle:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-.toggle-en{font-family:Geist,system-ui,sans-serif}
+.side{width:clamp(320px,26vw,400px)}
+.form{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:8px}
+.input{flex:1 1 180px;min-width:0;height:56px;box-sizing:border-box;padding:0 16px;border:2px solid var(--midnight);border-radius:8px;background:var(--paper);color:var(--midnight);font:inherit;font-size:16px;transition:border-color 160ms cubic-bezier(.2,0,0,1)}
+.input::placeholder{color:var(--muted)}
+.input:hover{border-color:var(--cobalt)}
+.input:focus{outline:3px solid var(--cobalt);outline-offset:2px}
+.btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 22px 0 24px;border:0;border-radius:999px;background:var(--cobalt);color:var(--paper);font-family:var(--text);font-size:16px;font-weight:600;cursor:pointer;transition:background-color 200ms cubic-bezier(.2,0,0,1),color 200ms cubic-bezier(.2,0,0,1)}
+html[dir=rtl] .btn{font-family:var(--arabic);font-size:17px;font-weight:700;padding:0 24px 0 22px}
+.btn:hover,.btn:focus-visible{background:var(--midnight);color:var(--lime)}
+.btn:focus-visible{outline:3px solid var(--midnight);outline-offset:2px}
+.arrow{transition:transform 260ms cubic-bezier(.2,0,0,1)}
+.btn:hover .arrow,.btn:focus-visible .arrow{transform:translateX(4px)}
+html[dir=rtl] .arrow{transform:scaleX(-1)}
+html[dir=rtl] .btn:hover .arrow,html[dir=rtl] .btn:focus-visible .arrow{transform:scaleX(-1) translateX(4px)}
+.hint{margin:0;font-size:15px;line-height:22px}
+html[dir=rtl] .hint{font-size:16px;line-height:26px}
+.hint.error{font-weight:600}
+.done{margin:0;padding:16px 20px;border-radius:16px;background:var(--cobalt);color:var(--paper);font-size:18px;line-height:26px;font-weight:600}
+
+.foot{position:absolute;inset-inline:48px;inset-block-end:calc(32px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;z-index:3}
+.toggle{min-height:44px;padding:0 20px;border:2px solid var(--midnight);border-radius:999px;background:transparent;color:var(--midnight);font-family:var(--arabic);font-size:16px;font-weight:700;cursor:pointer;transition:background-color 160ms cubic-bezier(.2,0,0,1),color 160ms cubic-bezier(.2,0,0,1)}
+.toggle:hover{background:var(--midnight);color:var(--lime)}
+.toggle:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.toggle-en{font-family:var(--text);font-weight:600}
 
 .up{animation:up 500ms cubic-bezier(.2,0,0,1) both}
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .fade{animation:fade 400ms linear both}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.root .d1{animation-delay:200ms}
-.root .d2{animation-delay:380ms}
-.root .d3{animation-delay:460ms}
-.root .d4{animation-delay:620ms}
-.root .d5{animation-delay:720ms}
-.root .d6{animation-delay:900ms}
+.d1{animation-delay:200ms}.d2{animation-delay:380ms}.d3{animation-delay:460ms}.d4{animation-delay:620ms}.d6{animation-delay:900ms}
 
-@media (min-width:1181px) and (max-height:820px){.stage{--fs:.82}}
-@media (min-width:1181px) and (max-height:700px){.stage{--fs:.7}}
+@media (min-width:1181px) and (max-height:820px){.stage{--fs:.76}}
+@media (min-width:1181px) and (max-height:700px){.stage{--fs:.62}}
 @media (max-width:1180px){
-.root{height:auto;min-height:100vh;padding:32px 40px;display:flex;flex-direction:column}
+.root{height:auto;min-height:100vh;min-height:100dvh;padding:32px 40px;display:flex;flex-direction:column}
 .head{position:relative;inset:auto}
 .stage{position:relative;inset:auto;height:560px;--fs:.78}
 .bottom{position:relative;inset:auto;flex-wrap:wrap}
 .foot{position:relative;inset:auto;margin-top:56px}
 }
 @media (max-width:760px){
-.root{padding:24px 20px 28px}
-.head{flex-direction:column;gap:20px}
+.root{padding:24px max(20px,env(safe-area-inset-right,0px)) 28px max(20px,env(safe-area-inset-left,0px))}
+.logo{width:120px}
+.face{width:60px}
 .stage{height:380px;--fs:.5}
 .bottom{flex-direction:column;align-items:stretch;gap:32px}
 .side{width:auto}
-.foot{justify-content:flex-start;margin-top:48px}
+.row{flex-wrap:wrap}
+.btn{flex:1 1 100%}
+.foot{margin-top:48px}
 }
 @media (prefers-reduced-motion:reduce){
 *,*::before{animation:none !important;transition:none !important}
@@ -130,72 +123,73 @@ html[dir=rtl] .done{font-weight:500}
 <div class="root">
 
 <header class="head">
-<div class="brand">
-<img class="logo" data-lang="en" src="/assets/leyxo-lockup-horizontal-reversed.svg" alt="Leyxo Studio" width="130" height="30">
-<img class="logo logo-ar" data-lang="ar" hidden src="/assets/leyxo-lockup-signage-reversed.svg" alt="ليكسو ستوديو، Leyxo Studio" width="138" height="52">
-</div>
+<img class="logo" src="/assets/leyxo-logo-primary.svg" alt="Leyxo" width="156" height="65">
+<img class="face" src="/assets/leyxo-face-wink-cobalt.svg" alt="" width="76" height="48" data-face>
 </header>
 
 <div class="stage" aria-hidden="true">
 <div class="scale">
 <div class="group" data-group>
-<div class="card" style="--i:0"><img src="/assets/cards/card-01-photo-material-violet-light.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:1"><img src="/assets/cards/card-02-mockup-business-cards.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:2"><img src="/assets/cards/card-03-photo-portrait-producer.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:3"><img src="/assets/cards/card-04-mockup-website-laptop.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:4"><img src="/assets/cards/card-05-photo-architecture-cut-shadow.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:5"><img src="/assets/cards/card-06-mockup-instagram-phone.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:6"><img src="/assets/cards/card-07-photo-food-hard-key.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:7"><img src="/assets/cards/card-08-mockup-mug-notebook.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:8"><img src="/assets/cards/card-09-photo-deboss-monogram.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:9"><img src="/assets/cards/card-10-mockup-reception-sign-halo.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:10"><img src="/assets/cards/card-11-photo-fintech-editorial.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:11"><img src="/assets/cards/card-12-mockup-tote.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:12"><img src="/assets/cards/card-13-photo-portrait-director.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:13"><img src="/assets/cards/card-14-mockup-client-delivery-kit.jpg" alt="" width="520" height="520" draggable="false"></div>
-<div class="card" style="--i:14"><img src="/assets/cards/card-15-photo-studio-night.jpg" alt="" width="520" height="520" draggable="false"></div>
+<div class="card" style="--i:0"><img src="/assets/cards/spin_pattern_cobalt.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:1"><img src="/assets/cards/spin_o_midnight.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:2"><img src="/assets/cards/spin_pattern_paper.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:3"><img src="/assets/cards/spin_x_sky.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:4"><img src="/assets/cards/spin_pattern_midnight.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:5"><img src="/assets/cards/spin_o_paper.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:6"><img src="/assets/cards/spin_x_cobalt.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:7"><img src="/assets/cards/spin_pattern_cobalt.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:8"><img src="/assets/cards/spin_o_midnight.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:9"><img src="/assets/cards/spin_pattern_paper.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:10"><img src="/assets/cards/spin_x_sky.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:11"><img src="/assets/cards/spin_pattern_midnight.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:12"><img src="/assets/cards/spin_o_paper.svg" alt="" draggable="false"></div>
+<div class="card" style="--i:13"><img src="/assets/cards/spin_x_cobalt.svg" alt="" draggable="false"></div>
 </div>
 </div>
 </div>
 
 <main class="bottom">
-<div class="title">
-<h1 class="h1" data-lang="en"><span class="line"><span class="d2">Polish</span></span><span class="line"><span class="d3">at speed.</span></span></h1>
-<h1 class="h1" data-lang="ar" hidden><span class="line"><span class="d2">إتقان</span></span><span class="line"><span class="d3">بسرعة.</span></span></h1>
+<div>
+<div data-lang="en" class="title">
+<span class="pill label up d1"><span class="dot" aria-hidden="true"></span>Coming soon</span>
+<h1 class="h1"><span class="line"><span class="d2">Brands that</span></span><span class="line"><span class="d3">wink back.</span></span></h1>
+</div>
+<div data-lang="ar" class="title" hidden>
+<span class="pill label up d1"><span class="dot" aria-hidden="true"></span>قريباً</span>
+<h1 class="h1"><span class="line"><span class="d2">علامات تجارية</span></span><span class="line"><span class="d3">تبادلك الغمزة.</span></span></h1>
+</div>
 </div>
 <div class="side up d4">
 <div data-lang="en">
 <form class="form" novalidate data-form>
-<label for="email-en" class="mono">WORK EMAIL</label>
+<label for="email-en" class="label">Work email</label>
 <div class="row">
 <input id="email-en" class="input" type="email" inputmode="email" autocomplete="email" dir="ltr" placeholder="name@company.com" aria-describedby="hint-en" required>
-<button type="submit" class="btn" aria-label="Notify me"><span class="roll"><span>/NOTIFY ME</span><span aria-hidden="true">/NOTIFY ME</span></span></button>
+<button type="submit" class="btn">Notify me<svg class="arrow" width="20" height="20" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 24h28M26 12l12 12-12 12"/></svg></button>
 </div>
 <p id="hint-en" class="hint" data-hint data-ok="One email when we launch. Nothing else." data-err="Enter a full email address, like name@company.com." aria-live="polite">One email when we launch. Nothing else.</p>
 </form>
-<p class="done" role="status" data-done hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>You're on the list. One email, at launch.</p>
+<p class="done" role="status" data-done hidden>You're on the list. One email, at launch. Like so.</p>
 </div>
 <div data-lang="ar" hidden>
 <form class="form" novalidate data-form>
-<label for="email-ar" class="mono">البريد الإلكتروني للعمل</label>
+<label for="email-ar" class="label">البريد الإلكتروني للعمل</label>
 <div class="row">
 <input id="email-ar" class="input" type="email" inputmode="email" autocomplete="email" dir="ltr" placeholder="name@company.com" aria-describedby="hint-ar" required>
-<button type="submit" class="btn"><span class="roll"><span>أبلغني</span><span aria-hidden="true">أبلغني</span></span></button>
+<button type="submit" class="btn">أبلغني<svg class="arrow" width="20" height="20" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 24h28M26 12l12 12-12 12"/></svg></button>
 </div>
 <p id="hint-ar" class="hint" data-hint data-ok="رسالة واحدة عند الإطلاق، لا أكثر." data-err="أدخل عنوان بريد إلكتروني كاملاً، مثل name@company.com." aria-live="polite">رسالة واحدة عند الإطلاق، لا أكثر.</p>
 </form>
-<p class="done" role="status" data-done hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>أنت على القائمة. رسالة واحدة عند الإطلاق.</p>
+<p class="done" role="status" data-done hidden>أنت على القائمة. رسالة واحدة عند الإطلاق.</p>
 </div>
 </div>
 </main>
 
 <footer class="foot fade d6">
-<div class="foot-end">
-<span class="mono sub" data-lang="en">© 2026 LEYXO STUDIO</span>
+<span class="label" data-lang="en">© 2026 Leyxo</span>
 <button type="button" class="toggle" data-lang="en" lang="ar" data-toggle-lang>العربية</button>
-<span class="mono sub" data-lang="ar" hidden>© 2026 ليكسو ستوديو</span>
+<span class="label" data-lang="ar" hidden>© 2026 ليكسو</span>
 <button type="button" class="toggle toggle-en" data-lang="ar" hidden lang="en" data-toggle-lang>English</button>
-</div>
 </footer>
 
 </div>
@@ -203,10 +197,11 @@ html[dir=rtl] .done{font-weight:500}
 (function () {
   var root = document.documentElement, KEY = 'leyxo-lang';
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var titles = { en: 'Leyxo Studio · Coming soon', ar: 'ليكسو ستوديو · قريباً' };
+  var titles = { en: 'Leyxo · Coming soon', ar: 'ليكسو · قريباً' };
+  var face = document.querySelector('[data-face]');
 
   /* Language */
-  function setLang(l, animate) {
+  function setLang(l) {
     root.lang = l; root.dir = l === 'ar' ? 'rtl' : 'ltr'; document.title = titles[l];
     var els = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < els.length; i++) els[i].hidden = els[i].getAttribute('data-lang') !== l;
@@ -218,10 +213,10 @@ html[dir=rtl] .done{font-weight:500}
     var saved = localStorage.getItem(KEY);
     start = (q === 'ar' || q === 'en') ? q : (saved === 'ar' ? 'ar' : 'en');
   } catch (e) {}
-  setLang(start, true);
+  setLang(start);
   var toggles = document.querySelectorAll('[data-toggle-lang]');
   for (var t = 0; t < toggles.length; t++) toggles[t].addEventListener('click', function () {
-    setLang(root.lang === 'ar' ? 'en' : 'ar', true);
+    setLang(root.lang === 'ar' ? 'en' : 'ar');
     var next = document.querySelector('[data-toggle-lang]:not([hidden])'); if (next) next.focus();
   });
 
@@ -244,6 +239,7 @@ html[dir=rtl] .done{font-weight:500}
       var body = encodeURIComponent('Please add me to the Leyxo launch list: ' + v);
       window.location.href = 'mailto:hello@leyxo.com?subject=' + subject + '&body=' + body;
       form.hidden = true; done.hidden = false;
+      if (face) face.src = '/assets/leyxo-face-grin-cobalt.svg';
     });
   })(forms[f]);
 
