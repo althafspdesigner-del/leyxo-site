@@ -52,10 +52,17 @@ a{color:inherit}
 /* Header and logo sting */
 .head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:28px}
 .logo{display:block;flex:0 0 auto;width:132px;height:auto;overflow:visible}
-.go .logo .ley{animation:ley 400ms var(--enter) 800ms both}
-.go .logo .lx{stroke-dasharray:1;animation:draw 250ms var(--enter) 450ms both}
-.go .logo .lo,.go .logo .lp{transform-box:fill-box;transform-origin:center;animation:pop 300ms var(--enter) both}
-.go .logo .ls{stroke-dasharray:1;animation:draw 260ms var(--enter) 620ms both}
+/* Opening loader: two open eyes pop in, the left one winks shut and becomes the x, the letters slide in to finish the logo, then it fades into the page. */
+.splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--lime);transition:opacity 420ms var(--exit)}
+.splash.out{opacity:0;pointer-events:none}
+.splash svg{display:block;width:min(62vw,440px);height:auto;overflow:visible;animation:sp-shift 450ms var(--enter) 1200ms both}
+.splash .ley{animation:ley 450ms var(--enter) 1200ms both}
+.splash .lx{stroke-dasharray:1;animation:draw 250ms var(--enter) 850ms both}
+.splash .lo,.splash .lp{transform-box:fill-box;transform-origin:center;animation:pop 300ms var(--enter) both}
+.splash .ls{stroke-dasharray:1;animation:draw 260ms var(--enter) 340ms both}
+.splash .eyeL{transform-box:fill-box;transform-origin:center;animation:pop 300ms var(--enter) both,sp-close 240ms var(--snap) 650ms forwards}
+@keyframes sp-shift{from{transform:translateX(-26%)}to{transform:none}}
+@keyframes sp-close{0%{transform:scaleY(1);opacity:1}80%{transform:scaleY(.06);opacity:1}100%{transform:scaleY(.06);opacity:0}}
 @keyframes ley{from{transform:translateX(-40px);opacity:0}to{transform:none;opacity:1}}
 @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -238,6 +245,7 @@ a{color:inherit}
 .cmain .btn{width:100%}
 }
 @media (prefers-reduced-motion:reduce){
+.splash{display:none}
 html{scroll-behavior:auto}
 *,*::before,*::after{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important;transition-delay:0ms !important}
 .track{animation:none !important;width:auto;flex-wrap:wrap}
@@ -247,6 +255,12 @@ html{scroll-behavior:auto}
 </style>
 </head>
 <body>
+<div class="splash" data-splash aria-hidden="true">
+<svg viewBox="0 0 720 300" fill="none" stroke-width="36" stroke-linecap="round" stroke-linejoin="round">
+<g class="ley" stroke="#030407"><path d="M30 20 V200"/><path d="M92 140 H208 A58 58 0 1 0 191 181"/><path d="M262 82 L312 196 M362 82 L283 262"/></g>
+<g stroke="#1558C9"><g class="eyeL"><circle cx="464" cy="141" r="58"/><circle cx="476" cy="129" r="20" fill="#1558C9" stroke="none"/></g><path class="lx" pathLength="1" d="M414 86 L514 196 M514 86 L414 196"/><g class="eye"><circle class="lo" cx="622" cy="140" r="58"/><circle class="lp" cx="634" cy="128" r="20" fill="#1558C9" stroke="none"/></g><path class="ls" pathLength="1" d="M497 248 Q547 284 597 248" stroke-width="24"/></g>
+</svg>
+</div>
 <header class="wrap head">
 <svg class="logo" viewBox="0 0 720 300" fill="none" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Leyxo">
 <g class="ley" stroke="#030407"><path d="M30 20 V200"/><path d="M92 140 H208 A58 58 0 1 0 191 181"/><path d="M262 82 L312 196 M362 82 L283 262"/></g>
@@ -352,15 +366,19 @@ html{scroll-behavior:auto}
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var canHover = !!(window.matchMedia && window.matchMedia('(hover: hover)').matches);
   var NS = 'http://www.w3.org/2000/svg';
-  /* Entrance motion only starts once the browser is really drawing frames, so nothing can get stuck hidden. */
-  requestAnimationFrame(function () { document.documentElement.classList.add('go'); });
+  /* Opening loader, then the page entrance. The loader is always removed on a timer, and the entrance is skipped if this browser is not running animations, so nothing can get stuck hidden. */
+  var frozen = false, INTRO = reduce ? 0 : 2150;
   (function () {
     var tl = document.timeline; if (!tl || tl.currentTime == null) return;
     var p0 = performance.now(), d0 = tl.currentTime;
-    setTimeout(function () {
-      var lag = (performance.now() - p0) - ((tl.currentTime || 0) - d0);
-      if (lag > 700) document.documentElement.classList.remove('go'); /* animations are not running here: show everything as it rests */
-    }, 1200);
+    setTimeout(function () { frozen = (performance.now() - p0) - ((tl.currentTime || 0) - d0) > 700; }, 1200);
+  })();
+  (function () {
+    var sp = document.querySelector("[data-splash]");
+    function enter() { if (!frozen) document.documentElement.classList.add("go"); }
+    if (reduce || !sp) { if (sp) sp.hidden = true; requestAnimationFrame(enter); return; }
+    setTimeout(function () { sp.classList.add("out"); enter(); }, INTRO);
+    setTimeout(function () { sp.hidden = true; }, INTRO + 460);
   })();
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
@@ -680,7 +698,7 @@ html{scroll-behavior:auto}
   $('[data-again]').addEventListener('click', function () { if (actionsEl.hidden || actionsEl.classList.contains('auto')) return; actionsEl.hidden = true; userActed = true; wipeThen(startRound); });
 
   clearBoard();
-  later(startRound, 1500);
+  setTimeout(startRound, INTRO + (reduce ? 60 : 1300));
 
   /* ---------- Confetti: flat x and o marks, brand colours only ---------- */
   function confetti() {
