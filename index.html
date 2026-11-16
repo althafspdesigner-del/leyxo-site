@@ -139,6 +139,8 @@ a{color:inherit}
 .board.live .cell:not(.taken):hover,.board.live .cell:not(.taken):focus-visible{color:var(--lime)}
 .board.live .cell:not(.taken):hover svg,.board.live .cell:not(.taken):focus-visible svg{transform:scale(1.14)}
 .board.live .cell.tip:not(.taken){animation:tip 1.2s var(--snap) infinite}
+.cell.threat{animation:threat .5s var(--snap) 3}
+@keyframes threat{0%,100%{color:var(--muted)}50%{color:var(--paper)}}
 @keyframes tip{0%,100%{color:var(--muted)}50%{color:var(--lime)}}
 .cell:focus-visible{outline:3px solid var(--lime);outline-offset:-10px;border-radius:16px}
 .wipe{position:absolute;inset:-2px;background:var(--cobalt);transform:scaleX(0);transform-origin:left;transition:transform 400ms var(--snap);pointer-events:none}
@@ -229,7 +231,7 @@ html{scroll-behavior:auto}
 <div class="intro">
 <span class="pill label"><i aria-hidden="true"></i>Coming soon</span>
 <h1 class="h1"><span class="w">Brands</span> <span class="w">that</span> <span class="w">wink</span> <span class="w">back.</span></h1>
-<p class="lede">Leyxo is a full-stack marketing and media agency. Every square on the board is something we do. You're x, and we've already opened.</p>
+<p class="lede">Every square on the board is something we do. You're x, and we've already opened.</p>
 </div>
 
 <section class="game on-dark" aria-label="Tic-tac-toe: every square is something Leyxo does">
@@ -266,7 +268,7 @@ html{scroll-behavior:auto}
 <div class="gtxt">
 <p class="label" data-cap-label>Round 1 of 3</p>
 <p class="gtitle" data-cap-title>Nine squares, nine things we do.</p>
-<p data-cap-text>Place an x to see what the square stands for. Three in a row wins the round.</p>
+<p data-cap-text>Place an x to see what the square stands for. O blocks, so think two moves ahead.</p>
 </div>
 </div>
 <div class="gact" data-actions hidden>
@@ -438,7 +440,7 @@ html{scroll-behavior:auto}
   var statusEl = $('[data-status]'), faceEl = $('[data-face]'), tokensEl = $('[data-tokens]');
   var capEl = $('[data-cap]'), capIco = $('[data-cap-ico]'), capLabel = $('[data-cap-label]'), capTitle = $('[data-cap-title]'), capText = $('[data-cap-text]');
   var actionsEl = $('[data-actions]');
-  var board = [], wins = 0, played = 0, live = false, tipTimer = 0, cells = [];
+  var board = [], wins = 0, played = 0, fails = 0, live = false, tipTimer = 0, cells = [];
   var sticky = { i: X_ICON, k: capLabel.textContent, t: capTitle.textContent, d: capText.textContent };
 
   function later(fn, ms) { return setTimeout(fn, T(ms)); }
@@ -453,6 +455,46 @@ html{scroll-behavior:auto}
     var safe = empties(b).filter(function (i) { return !wouldWin(b, i, 'o'); });
     var open = safe.filter(function (i) { return !wouldWin(b, i, 'x'); });
     return open.length ? open : safe;
+  }
+  /* Full look-ahead. Score is from x's side: positive means x wins, sooner is higher. */
+  function mm(b, turn, depth) {
+    if (winnerLine(b, "x")) return 10 - depth;
+    if (winnerLine(b, "o")) return depth - 10;
+    var e = empties(b); if (!e.length) return 0;
+    var best = turn === "x" ? -99 : 99;
+    for (var i = 0; i < e.length; i++) {
+      b[e[i]] = turn; var v = mm(b, turn === "x" ? "o" : "x", depth + 1); b[e[i]] = null;
+      if (turn === "x" ? v > best : v < best) best = v;
+    }
+    return best;
+  }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  /* O's reply to the opening always leaves x one winning plan, so every round can be won, but only by setting up two rows at once. After that O blocks, and from round 2 it plays its best move. */
+  function oSmart(b) {
+    var e = empties(b), i;
+    if (e.length === 8) {
+      if (b[4] === "x") return pick([1, 3, 5, 7]);
+      return pick(e.filter(function (k) { return k !== 4; }));
+    }
+    for (i = 0; i < e.length; i++) if (wouldWin(b, e[i], "o")) return e[i];
+    if (wins === 0) {
+      for (i = 0; i < e.length; i++) if (wouldWin(b, e[i], "x")) return e[i];
+      return pick(e);
+    }
+    var best = 99, moves = [];
+    e.forEach(function (k) {
+      b[k] = "o"; var v = mm(b, "x", 1); b[k] = null;
+      if (v < best) { best = v; moves = [k]; } else if (v === best) moves.push(k);
+    });
+    return pick(moves);
+  }
+  function smartForX(b) {
+    var e = empties(b), best = -99, moves = [];
+    e.forEach(function (k) {
+      b[k] = "x"; var v = mm(b, "o", 1); b[k] = null;
+      if (v > best) { best = v; moves = [k]; } else if (v === best) moves.push(k);
+    });
+    return moves.length ? moves[0] : -1;
   }
   function bestForX(b) {
     var e = empties(b), i;
@@ -483,8 +525,9 @@ html{scroll-behavior:auto}
     live = v; boardEl.classList.toggle('live', v);
     clearTimeout(tipTimer); cells.forEach(function (c) { c.classList.remove('tip'); });
     if (v) tipTimer = setTimeout(function () {
-      var sq = bestForX(board); if (live && sq >= 0) cells[sq].classList.add('tip');
-    }, 3200);
+      if (!live || !fails) return;
+      var sq = smartForX(board.slice()); if (sq >= 0) cells[sq].classList.add('tip');
+    }, 4500);
   }
   function label(i) {
     cells[i].setAttribute('aria-label', NAMES[i] + ': ' + INFO[i].t + ', ' + (board[i] ? board[i] : 'empty'));
@@ -536,18 +579,35 @@ html{scroll-behavior:auto}
     }, 260);
   }
   function oMove() {
-    var ch = oChoices(board);
-    if (!ch.length) { stalemate(); return; }
-    place(ch[Math.floor(Math.random() * ch.length)], 'o');
+    var sq;
+    if (fails >= 2) { /* two failed tries at this round: O eases off so nobody gets stuck */
+      var ch = oChoices(board);
+      if (!ch.length) { stalemate(); return; }
+      sq = pick(ch);
+    } else {
+      sq = oSmart(board);
+      if (wouldWin(board, sq, 'o')) { missedBlock(sq); return; }
+    }
+    place(sq, 'o');
     later(function () {
       if (!empties(board).length) { stalemate(); return; }
       var one = empties(board).some(function (i) { return wouldWin(board, i, 'x'); });
-      setMood(one ? 'wow' : 'wink'); setStatus(one ? 'One more.' : 'Your move.');
+      var danger = fails < 2 && empties(board).some(function (i) { return wouldWin(board, i, 'o'); });
+      setMood(one || danger ? 'wow' : 'wink');
+      setStatus(one ? 'One more.' : danger ? 'Block that.' : 'Your move.');
       setLive(true);
     }, 360);
   }
+  /* O is never drawn winning: the round restarts the moment it has an open row. */
+  function missedBlock(sq) {
+    fails++; setLive(false); setMood('wow'); setStatus('O had a row. Go again.');
+    cells[sq].classList.add('threat');
+    setCap({ i: X_ICON, k: 'Round ' + Math.min(wins + 1, 3) + ' of 3', t: 'Block first, then build.', d: 'O was one square from three in a row. Take that square before you make your own.' });
+    later(function () { cells[sq].classList.remove('threat'); wipeThen(startRound); }, 1900);
+  }
   function stalemate() {
-    setLive(false); setMood('look'); setStatus('No three yet. Go again.');
+    fails++; setLive(false); setMood('look'); setStatus('No three yet. Go again.');
+    if (fails === 1) setCap({ i: X_ICON, k: 'Round ' + Math.min(wins + 1, 3) + ' of 3', t: 'O blocks one row at a time.', d: 'Set up two rows at once and it can only stop one of them.' });
     later(function () { wipeThen(startRound); }, 900);
   }
   function userMove(i) {
@@ -562,7 +622,7 @@ html{scroll-behavior:auto}
     later(oMove, 820);
   }
   function onWin(l) {
-    drawWin(l); wins++;
+    drawWin(l); wins++; fails = 0;
     setMood('grin');
     var combo = l.map(function (k) { return INFO[k].s; }).join(' + ') + '.';
     setCap({ i: X_ICON, k: 'Three in a row', t: combo, d: WIN_TEXT[Math.min(wins, 3) - 1] });
@@ -575,7 +635,7 @@ html{scroll-behavior:auto}
       tokensEl.classList.add('row3');
       winSound(true); confetti();
       later(function () {
-        setCap({ i: X_ICON, k: 'Three rounds, three wins', t: 'We may have gone easy on you.', d: 'Like so. Now make it official.' });
+        setCap({ i: X_ICON, k: 'Three rounds, three wins', t: 'Well played.', d: 'Three in a row, three times. Like so.' });
         actionsEl.hidden = false;
       }, 3200);
     } else if (wins > 3) {
