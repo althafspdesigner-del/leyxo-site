@@ -152,6 +152,17 @@ a{color:inherit}
 .osub{font-size:17px;line-height:25px}
 .over .gact{margin-top:10px}
 .over.auto .gact{display:none}
+.loader{display:none;position:relative;align-items:center;gap:10px;margin-top:10px;padding-bottom:14px}
+.over.auto .loader{display:flex}
+.loader svg{display:block;width:28px;height:28px;fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round}
+.loader svg:nth-child(2){stroke:var(--paper)}
+.go .loader svg>*{stroke-dasharray:1;animation:ld 750ms var(--snap) infinite}
+.go .loader svg:nth-child(2)>*{animation-delay:120ms}
+.go .loader svg:nth-child(3)>*{animation-delay:240ms}
+@keyframes ld{0%{stroke-dashoffset:1}45%,75%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
+.loader i{position:absolute;left:0;bottom:0;width:104px;height:4px;border-radius:4px;background:var(--lime);transform-origin:left}
+.go .over.auto .loader i{animation:ldbar 1500ms linear both}
+@keyframes ldbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .over .btn{background:var(--lime);color:var(--midnight)}
 .over .btn:hover,.over .btn:focus-visible{background:var(--midnight);color:var(--lime)}
 .over .btn:focus-visible{outline-color:var(--paper)}
@@ -248,7 +259,7 @@ html{scroll-behavior:auto}
 <div class="intro">
 <span class="pill label"><i aria-hidden="true"></i>Coming soon</span>
 <h1 class="h1"><span class="w">Make</span> <span class="w">your</span> <span class="w">move.</span></h1>
-<p class="lede">Every square on the board is one of our services. You're x, and we've already opened.</p>
+<p class="lede">Every square on the board is one of our services. You're x, and O has already opened.</p>
 </div>
 
 <section class="game on-dark" aria-label="Tic-tac-toe: every square is a Leyxo service">
@@ -259,7 +270,7 @@ html{scroll-behavior:auto}
 <g class="m-wow"><circle cx="82" cy="56" r="24"/><circle cx="82" cy="56" r="8" fill="#D4FF24" stroke="none"/><circle cx="158" cy="56" r="24"/><circle cx="158" cy="56" r="8" fill="#D4FF24" stroke="none"/><circle cx="120" cy="116" r="12" stroke-width="13"/></g>
 <g class="m-grin"><path d="M62 40 L102 80 M102 40 L62 80"/><path d="M138 40 L178 80 M178 40 L138 80"/><path d="M80 108 Q120 146 160 108" stroke-width="13"/></g>
 </svg>
-<p class="status" data-status aria-live="polite">We opened.</p>
+<p class="status" data-status aria-live="polite">O opens.</p>
 <button type="button" class="snd" id="sound-toggle" data-sound aria-pressed="true" aria-label="Sound">
 <svg class="on" width="24" height="24" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 19v10h8l10 8V11l-10 8H8zM33 18c3 3 3 9 0 12M38 13c6 6 6 16 0 22"/></svg>
 <svg class="off" width="24" height="24" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 19v10h8l10 8V11l-10 8H8zM33 19l10 10M43 19L33 29"/></svg>
@@ -276,6 +287,7 @@ html{scroll-behavior:auto}
 <p class="label" data-over-label>You 0 · O 0</p>
 <p class="otitle" data-over-title>Win like this with Leyxo.</p>
 <p class="osub" data-over-sub></p>
+<div class="loader" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M5 5L19 19M19 5L5 19"/></svg><svg viewBox="0 0 24 24"><circle pathLength="1" cx="12" cy="12" r="7.5"/></svg><svg viewBox="0 0 24 24"><path pathLength="1" d="M5 5L19 19M19 5L5 19"/></svg><i></i></div>
 <div class="gact">
 <a class="btn btn-sm" href="#join" data-join>Join the waitlist</a>
 <button type="button" class="btn btn-sm btn-ghost" data-again>Play again</button>
@@ -484,10 +496,15 @@ html{scroll-behavior:auto}
   /* O plays its best move every turn: it takes wins, blocks, and sets up two rows at once. Its only soft spot is the reply to the opening, which is sometimes the weaker square, so a sharp player can still win. */
   function oSmart(b) {
     var e = empties(b), i;
-    if (e.length === 8) {
-      var weak = Math.random() < 0.15;
-      if (b[4] === "x") return pick(weak ? [1, 3, 5, 7] : [0, 2, 6, 8]);
-      return weak ? pick(e.filter(function (k) { return k !== 4; })) : 4;
+    if (e.length === 9) return pick([0, 2, 6, 8]);
+    if (e.length === 8 && (draws >= 4 || Math.random() < 0.15)) {
+      /* The one soft spot: a reply that still blocks everything, but can be beaten by setting up two rows at once. Of those, take the one that takes x longest to punish. */
+      var cand = [], low = 99;
+      e.forEach(function (k) {
+        b[k] = "o"; var v = mm(b, "x", 1); b[k] = null;
+        if (v > 0) { if (v < low) { low = v; cand = [k]; } else if (v === low) cand.push(k); }
+      });
+      if (cand.length) return pick(cand);
     }
     for (i = 0; i < e.length; i++) if (wouldWin(b, e[i], "o")) return e[i];
     var best = 99, moves = [];
@@ -585,14 +602,9 @@ html{scroll-behavior:auto}
       later(function () { setLive(true); }, 300);
       return;
     }
-    setStatus("We opened.");
-    var first = OPEN[played % OPEN.length]; played++;
-    later(function () {
-      place(first, "x");
-      if (played > 1) setCap({ i: INFO[first].i, k: INFO[first].k, t: INFO[first].t, d: INFO[first].d });
-      later(function () { setMood("look"); setStatus("O replies."); }, 380);
-      later(oMove, 900);
-    }, 260);
+    /* First game: O opens in a corner and plays perfectly, so the best a visitor can do is draw. */
+    played++; setMood("look"); setStatus("O opens.");
+    later(oMove, 500);
   }
   function oMove() {
     if (!empties(board).length) { stalemate(); return; }
@@ -629,8 +641,8 @@ html{scroll-behavior:auto}
       $("[data-over-title]").textContent = "Don’t settle for a draw.";
       $("[data-over-sub]").textContent = "Play with Leyxo.";
       actionsEl.classList.add("auto"); actionsEl.hidden = false;
-      later(function () { wipeThen(startRound); }, 2800);
-    }, 900);
+      later(function () { wipeThen(startRound); }, 1500);
+    }, 450);
   }
   function userMove(i) {
     if (!live || board[i]) return;
@@ -644,7 +656,7 @@ html{scroll-behavior:auto}
     later(oMove, 820);
   }
   function onWin(l) {
-    drawWin(l); wins++;
+    drawWin(l); wins++; draws = 0;
     setMood("grin"); setStatus("Three in a row.");
     var combo = l.map(function (k) { return INFO[k].s; }).join(" + ") + ".";
     setCap({ i: X_ICON, k: score(), t: combo, d: "We play them together, so every piece looks and sounds like the same brand. Like so." });
