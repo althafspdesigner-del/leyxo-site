@@ -151,6 +151,7 @@ a{color:inherit}
 .otitle{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.2vw,46px);line-height:1;letter-spacing:-.025em;text-wrap:balance}
 .osub{font-size:17px;line-height:25px}
 .over .gact{margin-top:10px}
+.over.auto .gact{display:none}
 .over .btn{background:var(--lime);color:var(--midnight)}
 .over .btn:hover,.over .btn:focus-visible{background:var(--midnight);color:var(--lime)}
 .over .btn:focus-visible{outline-color:var(--paper)}
@@ -451,7 +452,7 @@ html{scroll-behavior:auto}
   var statusEl = $('[data-status]'), faceEl = $('[data-face]'), tokensEl = $('[data-tokens]');
   var capEl = $('[data-cap]'), capIco = $('[data-cap-ico]'), capLabel = $('[data-cap-label]'), capTitle = $('[data-cap-title]'), capText = $('[data-cap-text]');
   var actionsEl = $('[data-actions]');
-  var board = [], wins = 0, played = 0, fails = 0, losses = 0, live = false, tipTimer = 0, cells = [];
+  var board = [], wins = 0, played = 0, fails = 0, losses = 0, draws = 0, live = false, tipTimer = 0, cells = [];
   var sticky = { i: X_ICON, k: capLabel.textContent, t: capTitle.textContent, d: capText.textContent };
 
   function later(fn, ms) { return setTimeout(fn, T(ms)); }
@@ -577,7 +578,14 @@ html{scroll-behavior:auto}
 
   function startRound() {
     setLive(false); clearBoard(); actionsEl.hidden = true;
-    setMood("wink"); setStatus("We opened.");
+    setMood("wink");
+    if (played > 0) { /* restarts: the visitor opens */
+      played++; setStatus("You open.");
+      setCap({ i: X_ICON, k: "New game", t: "You open this time.", d: "Pick any square to start. O replies, and plays to win." });
+      later(function () { setLive(true); }, 300);
+      return;
+    }
+    setStatus("We opened.");
     var first = OPEN[played % OPEN.length]; played++;
     later(function () {
       place(first, "x");
@@ -603,7 +611,7 @@ html{scroll-behavior:auto}
       $("[data-over-label]").textContent = score();
       $("[data-over-title]").textContent = title;
       $("[data-over-sub]").textContent = sub;
-      actionsEl.hidden = false;
+      actionsEl.classList.remove("auto"); actionsEl.hidden = false;
     }, ms);
   }
   function onLoss(l) {
@@ -614,8 +622,15 @@ html{scroll-behavior:auto}
     finish(1500, "Don\x27t lose your branding game.", "Play with Leyxo.");
   }
   function stalemate() {
-    setLive(false); setMood("wink"); setStatus("A draw. New game.");
-    later(function () { wipeThen(startRound); }, 1100);
+    draws++;
+    setLive(false); setMood("wink"); setStatus("A draw.");
+    later(function () {
+      $("[data-over-label]").textContent = "A draw · New game starting";
+      $("[data-over-title]").textContent = "Don’t settle for a draw.";
+      $("[data-over-sub]").textContent = "Play with Leyxo.";
+      actionsEl.classList.add("auto"); actionsEl.hidden = false;
+      later(function () { wipeThen(startRound); }, 2800);
+    }, 900);
   }
   function userMove(i) {
     if (!live || board[i]) return;
@@ -650,7 +665,7 @@ html{scroll-behavior:auto}
     b.addEventListener('blur', unpeek);
     cellsEl.appendChild(b); cells.push(b);
   })(i);
-  $('[data-again]').addEventListener('click', function () { if (actionsEl.hidden) return; actionsEl.hidden = true; userActed = true; wipeThen(startRound); });
+  $('[data-again]').addEventListener('click', function () { if (actionsEl.hidden || actionsEl.classList.contains('auto')) return; actionsEl.hidden = true; userActed = true; wipeThen(startRound); });
 
   clearBoard();
   later(startRound, 1500);
