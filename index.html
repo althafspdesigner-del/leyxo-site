@@ -143,6 +143,19 @@ a{color:inherit}
 @keyframes threat{0%,100%{color:var(--muted)}50%{color:var(--paper)}}
 @keyframes tip{0%,100%{color:var(--muted)}50%{color:var(--lime)}}
 .cell:focus-visible{outline:3px solid var(--lime);outline-offset:-10px;border-radius:16px}
+.over{position:absolute;inset:-2px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px;padding:32px;border-radius:14px;background:var(--cobalt);color:var(--paper)}
+.go .over{animation:overin 400ms var(--snap) both}
+.go .over>*{animation:rise 400ms var(--enter) 280ms both}
+@keyframes overin{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.over .label{color:var(--lime)}
+.otitle{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.2vw,46px);line-height:1;letter-spacing:-.025em;text-wrap:balance}
+.osub{font-size:17px;line-height:25px}
+.over .gact{margin-top:10px}
+.over .btn{background:var(--lime);color:var(--midnight)}
+.over .btn:hover,.over .btn:focus-visible{background:var(--midnight);color:var(--lime)}
+.over .btn:focus-visible{outline-color:var(--paper)}
+.over .btn-ghost{background:transparent;color:var(--paper)}
+.over .btn-ghost:hover,.over .btn-ghost:focus-visible{background:var(--paper);color:var(--cobalt)}
 .wipe{position:absolute;inset:-2px;background:var(--cobalt);transform:scaleX(0);transform-origin:left;transition:transform 400ms var(--snap);pointer-events:none}
 .wipe.in{transform:scaleX(1)}
 .wipe.out{transform-origin:right}
@@ -204,6 +217,9 @@ a{color:inherit}
 .gtitle{font-size:18px;line-height:24px}
 .gtxt p:last-child{font-size:15px;line-height:22px}
 .gact .btn{flex:1 1 auto}
+.over{padding:20px;gap:10px}
+.otitle{font-size:clamp(26px,8.4vw,34px)}
+.osub{font-size:15px;line-height:22px}
 .row .btn{flex:1 1 100%}
 .set li{font-size:17px}
 .ticker{padding-block:14px}
@@ -255,6 +271,15 @@ html{scroll-behavior:auto}
 <g data-marks></g>
 </svg>
 <div class="cells" data-cells></div>
+<div class="over" data-actions role="status" hidden>
+<p class="label" data-over-label>You 0 · O 0</p>
+<p class="otitle" data-over-title>Win like this with Leyxo.</p>
+<p class="osub" data-over-sub></p>
+<div class="gact">
+<a class="btn btn-sm" href="#join" data-join>Join the waitlist</a>
+<button type="button" class="btn btn-sm btn-ghost" data-again>Play again</button>
+</div>
+</div>
 <div class="wipe" data-wipe></div>
 </div>
 
@@ -265,10 +290,6 @@ html{scroll-behavior:auto}
 <p class="gtitle" data-cap-title>Nine squares, nine services.</p>
 <p data-cap-text>Place an x to see what the square stands for. O plays to win, so think two moves ahead.</p>
 </div>
-</div>
-<div class="gact" data-actions hidden>
-<a class="btn btn-sm" href="#join" data-join>Join the waitlist</a>
-<button type="button" class="btn btn-sm btn-ghost" data-again>Play again</button>
 </div>
 <canvas class="confetti" data-confetti aria-hidden="true"></canvas>
 </section>
@@ -577,18 +598,24 @@ html{scroll-behavior:auto}
     }, 360);
   }
   function score() { return "You " + wins + " · O " + losses; }
-  function finish(ms) { later(function () { actionsEl.hidden = false; }, ms); }
+  function finish(ms, title, sub) {
+    later(function () {
+      $("[data-over-label]").textContent = score();
+      $("[data-over-title]").textContent = title;
+      $("[data-over-sub]").textContent = sub;
+      actionsEl.hidden = false;
+    }, ms);
+  }
   function onLoss(l) {
     drawWin(l); losses++;
     setLive(false); setMood("look"); setStatus("O takes this one.");
     if (userActed) { tone(330, 0.25, "triangle", 0.05); tone(247, 0.4, "triangle", 0.05, 0.16); }
-    setCap({ i: X_ICON, k: score(), t: "This one didn${Q}t land.", d: "O had two rows going at once. Block first next time, then build your own." });
-    finish(900);
+    setCap({ i: X_ICON, k: score(), t: "This one didn't land.", d: "O had two rows going at once. Block first next time, then build your own." });
+    finish(1500, "Don\x27t lose your branding game.", "Play with Leyxo.");
   }
   function stalemate() {
-    setLive(false); setMood("wink"); setStatus("A draw.");
-    setCap({ i: X_ICON, k: score(), t: "A draw against an O that barely slips.", d: "That is a good result. Go again, or make it official." });
-    finish(700);
+    setLive(false); setMood("wink"); setStatus("A draw. New game.");
+    later(function () { wipeThen(startRound); }, 1100);
   }
   function userMove(i) {
     if (!live || board[i]) return;
@@ -607,7 +634,7 @@ html{scroll-behavior:auto}
     var combo = l.map(function (k) { return INFO[k].s; }).join(" + ") + ".";
     setCap({ i: X_ICON, k: score(), t: combo, d: "We play them together, so every piece looks and sounds like the same brand. Like so." });
     winSound(true); confetti();
-    finish(1800);
+    finish(2000, "Win like this with Leyxo.", "Three in a row: " + combo);
   }
 
   /* Build the nine squares as real buttons, each carrying its icon. */
