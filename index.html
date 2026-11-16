@@ -31,7 +31,7 @@
 color-scheme:light}
 *,*::before,*::after{box-sizing:border-box}
 html{background:var(--lime);scroll-behavior:smooth}
-body{margin:0;background:var(--lime);color:var(--midnight);font-family:var(--text);font-size:17px;line-height:26px;-webkit-font-smoothing:antialiased;font-synthesis:none}
+body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--lime);color:var(--midnight);font-family:var(--text);font-size:17px;line-height:26px;-webkit-font-smoothing:antialiased;font-synthesis:none}
 [hidden]{display:none !important}
 .wrap{max-width:1240px;margin-inline:auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 .label{margin:0;font-size:13px;line-height:16px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
@@ -68,7 +68,7 @@ a{color:inherit}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 
 /* Hero */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,540px);grid-template-areas:"intro game" "form game";grid-template-rows:1fr auto;column-gap:64px;row-gap:36px;padding-block:20px 72px}
+.hero{flex:1 0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,540px);grid-template-areas:"intro game" "form game";grid-template-rows:1fr auto;column-gap:64px;row-gap:36px;padding-block:20px 72px}
 .intro{grid-area:intro;display:flex;flex-direction:column;align-items:flex-start;gap:22px;min-width:0}
 .pill{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 14px;border-radius:999px;background:var(--cobalt);color:var(--paper)}
 .pill i{width:8px;height:8px;border-radius:999px;background:var(--lime)}
@@ -79,6 +79,7 @@ a{color:inherit}
 @keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
 .lede{max-width:32em;font-size:19px;line-height:29px}
 .go .lede{animation:rise 400ms var(--enter) 620ms both}
+.lead{display:block;margin-bottom:6px;font-size:26px;line-height:32px;font-weight:600}
 .formbox{grid-area:form;max-width:520px;min-width:0}
 .go .formbox{animation:rise 400ms var(--enter) 740ms both}
 .form{display:flex;flex-direction:column;gap:10px}
@@ -202,18 +203,18 @@ a{color:inherit}
 
 /* Close */
 .close{background:var(--midnight);color:var(--paper)}
-.close .wrap{padding-block:88px 40px;display:flex;flex-direction:column;gap:56px}
+.close .wrap{padding-block:28px}
 .cmain{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
 .cmain>div{display:flex;flex-direction:column;gap:14px;min-width:0}
 .h2x{font-family:var(--display);font-weight:800;font-size:clamp(52px,8vw,120px);line-height:.95;letter-spacing:-.025em}
 .cmain p{color:var(--on-dark-muted);font-size:19px;line-height:28px}
-.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;border-top:2px solid var(--panel-line);color:var(--on-dark-muted);font-size:15px;line-height:22px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--on-dark-muted);font-size:15px;line-height:22px}
 
 @media (max-width:980px){
 .hero{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "game" "form";grid-template-rows:auto;row-gap:28px;padding-block:4px 56px}
 .intro{gap:16px}
 .game,.formbox{width:100%;max-width:540px;justify-self:center}
-.close .wrap{padding-block:64px 32px;gap:40px}
+.close .wrap{padding-block:24px}
 }
 @media (max-width:560px){
 .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -272,8 +273,8 @@ html{scroll-behavior:auto}
 <main class="wrap hero">
 <div class="intro">
 <span class="pill label"><i aria-hidden="true"></i>Coming soon</span>
-<h1 class="h1"><span class="w">Make</span> <span class="w">your</span> <span class="w">move.</span></h1>
-<p class="lede">Every square on the board is one of our services. You're x, and O has already opened.</p>
+<h1 class="h1"><span class="w">Brands</span> <span class="w">that</span> <span class="w">wink</span> <span class="w">back.</span></h1>
+<p class="lede"><strong class="lead">Make your move.</strong> Every square on the board is one of our services. You're x, and O has already opened.</p>
 </div>
 
 <section class="game on-dark" aria-label="Tic-tac-toe: every square is a Leyxo service">
@@ -342,20 +343,13 @@ html{scroll-behavior:auto}
 <li>We play them together<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg></li>
 <li>Nine squares, nine services<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg></li>
 <li>One brief, one team, one brand<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg></li>
-<li>Brands that wink back.<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg></li>
+<li>Make your move<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg></li>
 </ul>
 </div>
 </div>
 
 <section class="close on-dark">
 <div class="wrap">
-<div class="cmain">
-<div>
-<h2 class="h2x">Brands that wink back.</h2>
-<p>One email when we launch. Nothing else.</p>
-</div>
-<a class="btn" href="#join" data-join>Join the waitlist<svg class="arrow" width="20" height="20" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 24h28M26 12l12 12-12 12"/></svg></a>
-</div>
 <footer class="foot"><span>© 2026 Leyxo</span><span class="sel">hello@leyxo.com</span></footer>
 </div>
 </section>
